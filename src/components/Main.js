@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { api } from '../utils/api.js'
+import Card from '../components/Card'
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
     const [userName, setUserName] = useState('Жак Ив Кусто');
     const [userAvatar, setUserAvatar] = useState('');
     const [userDescription, setUserDescription] = useState('Исследователь океана');
@@ -18,7 +19,6 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
         api.getInitialCards()
             .then(res => {
                 setCards(res)
-                console.log(res)
             })
     }, [userName])
 
@@ -37,23 +37,15 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
             </section>
 
             <section className="cards">
-
                 {
-                        //   <template className="card__template">
-                        //   <div className="card">
-                        //     <button className="card__delete-button" type="button"></button>
-                        //     <img src="#" className="card__image" alt="Картинка места" />
-                        //     <div className="card__description">
-                        //       <h2 className="card__text"></h2>
-                        //       <div className="card__like-section">
-                        //         <button className="card__like-button" type="button"></button>
-                        //         <span className="card__like-number"></span>
-                        //       </div>
-                        //     </div>
-                        //   </div>
-                        // </template>
+                    cards.map((card) => {
+                        return <Card cardData={card} onCardClick={onCardClick}/>
+                    })
                 }
 
+                {
+
+                }
             </section>
         </main>
     );
