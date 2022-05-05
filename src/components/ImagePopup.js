@@ -1,5 +1,5 @@
-function ImagePopup({card, onClose, isOpen}) {
-    
+function ImagePopup({ card, onClose, isOpen }) {
+
     return (
         <section className={`popup image-popup ${isOpen ? 'popup_opened' : ''}`}>
             <div className="image-popup__container">

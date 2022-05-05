@@ -4,9 +4,9 @@ function PopupWithForm({ name, title, isOpen, children, onClose, buttonText }) {
             <div className="popup__container ">
                 <button className="popup__close-button" type="button" onClick={onClose}></button>
                 <h3 className="popup__title">{title}</h3>
-                <form className="popup__inputs" name={name} novalidate>
+                <form className="popup__inputs" name={name} noValidate>
                     {children}
-                    <button className="popup__save-button" type="submit">{ buttonText }</button>                    
+                    <button className="popup__save-button" type="submit">{buttonText}</button>
                 </form>
             </div>
         </section>
