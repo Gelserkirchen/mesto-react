@@ -11,15 +11,14 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupState] = useState(false);
   const [isImagePopupOpen, setImagePopupState] = useState(false);
   const [isAvatarSaved, saveAvatar] = useState(false);
-  const [selectedCard, setCardFullView] = useState({ link: '', name: '' });
+  const [selectedCard, setSelectedCard] = useState({ link: '', name: '' });
 
   function handleEditProfileClick() { setEditProfileState(!isEditProfilePopupOpen) }
   function handleAddPlaceClick() { setAddPlacePopupState(!isAddPlacePopupOpen) }
   function handleEditAvatarClick() { setEditAvatarPopupState(!isEditAvatarPopupOpen) }
   function handleCardClick(card) {
-    setCardFullView(card)
+    setSelectedCard(card)
     setImagePopupState(true)
-    console.log('click')
   }
 
   function closeAllPopups() {
@@ -29,10 +28,13 @@ function App() {
     setImagePopupState(false)
   }
 
-  return (
+  return ( 
     <div className="page">
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick} />
+      <Main onEditProfile={handleEditProfileClick} 
+            onAddPlace={handleAddPlaceClick} 
+            onEditAvatar={handleEditAvatarClick} 
+            onCardClick={handleCardClick} />
       <Footer />
 
       <PopupWithForm name={"profile"} title={"Редактировать профиль"} buttonText={"Сохранить"} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
@@ -71,14 +73,8 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name={"delete-card"} title={"Вы уверены?"} buttonText={"Да"} isOpen={isAvatarSaved} onClose={closeAllPopups}>
-        <label htmlFor="link-input" className="popup__label">
-          <input id="update-avatar-link" name="link" className="popup__input popup__input_type_link"
-            type="url" placeholder="Ссылка на аватар" required minLength="2" />
-          <span className="popup__input-error update-avatar-link-error">Текст ошибки</span>
-        </label>
-      </PopupWithForm>
-
+      <PopupWithForm name={"delete-card"} title={"Вы уверены?"} buttonText={"Да"} isOpen={isAvatarSaved} onClose={closeAllPopups}/>
+  
       <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
 
     </div>

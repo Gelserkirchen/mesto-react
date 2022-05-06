@@ -15,12 +15,19 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
                 setUserAvatar(res.avatar);
                 setUserDescription(res.about);
             })
+            .catch((err) => {
+                console.log('Ошибка загрузки данных профиля', err)
+            })
 
         api.getInitialCards()
             .then(res => {
                 setCards(res)
             })
-    }, [userName])
+            .catch((err) => {
+                console.log('Ошибка загрузки данных карточек', err)
+            })
+
+    }, [])
 
     return (
         <main className="content">
