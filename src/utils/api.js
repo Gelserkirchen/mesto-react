@@ -51,6 +51,10 @@ class Api {
             .then(res => res.ok ? res.json() : Promise.reject('Ошибка: ', res.status))
     }
 
+    changeLikeCardStatus(cardId, isLiked) {
+        return !isLiked ? this.deleteLike(cardId) : this.addLike(cardId)
+    }
+
     deleteLike(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: "DELETE",

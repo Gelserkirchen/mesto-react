@@ -5,6 +5,7 @@
 @import url(../src/blocks/card/__image/card__image.css);
 @import url(../src/blocks/card/__text/card__text.css);
 @import url(../src/blocks/card/__delete-button/card__delete-button.css);
+@import url(../src/blocks/card/__delete-button/_hidden/card__delete-button_hidden.css);
 @import url(../src/blocks/card/__like-button/_active/card__like-button_active.css);
 @import url(../src/blocks/card/__like-button/card__like-button.css);
 @import url(../src/blocks/card/__like-number/card__like-number.css);
