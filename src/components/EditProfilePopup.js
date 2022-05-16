@@ -35,13 +35,13 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
             <PopupWithForm name={"profile"} title={"Редактировать профиль"} buttonText={"Сохранить"} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
                 <label htmlFor="name-input" className="popup__label">
                     <input id="name-input" name="name" className="popup__input popup__input_type_name" type="text"
-                        placeholder="Имя" minLength="2" maxLength="40" value={name} onChange={handleChangeName} required />
+                        placeholder="Имя" minLength="2" maxLength="40" value={name || ''} onChange={handleChangeName} required />
                     <span id="error-of-input" className="popup__input-error name-input-error">Текст ошибки</span>
                 </label>
 
                 <label htmlFor="profession-input" className="popup__label">
                     <input id="profession-input" name="profession" className="popup__input popup__input_type_profile"
-                        type="text" placeholder="Профессия" minLength="2" value={description} onChange={handleChangeProfession} maxLength="200" required />
+                        type="text" placeholder="Профессия" minLength="2" value={description || ''} onChange={handleChangeProfession} maxLength="200" required />
                     <span className="popup__input-error profession-input-error ">Текст ошибки</span>
                 </label>
             </PopupWithForm>

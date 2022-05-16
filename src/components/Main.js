@@ -1,42 +1,14 @@
-import { useEffect, useState, useContext } from 'react';
-import { api } from '../utils/api.js'
+import { useContext } from 'react';
 import Card from '../components/Card'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-    const [cards, setCards] = useState([]);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete }) {
     const currentUser = useContext(CurrentUserContext);
-
-    function handleCardLike(card) {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-            setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-        });
-    }
-
-    function handleCardDelete(card) {
-            api.deleteCard(card._id).then((data) => {
-                setCards((cards) => cards.filter((c) => {return c._id !== card._id}))
-            }
-        );
-    }
-
-    useEffect(() => {
-        api.getInitialCards()
-            .then(res => {
-                setCards(res)
-            })
-            .catch((err) => {
-                console.log('Ошибка загрузки данных карточек', err)
-            })
-
-    }, [])
 
     return (
         <main className="content">
             <section className="profile">
-                <a style={{ backgroundImage: `url(${currentUser.avatar})` }} href="#" className="profile__avatar" alt="Аватар" onClick={onEditAvatar}></a>
+                <button style={{ backgroundImage: `url(${currentUser.avatar})` }} className="profile__avatar" alt="Аватар" onClick={onEditAvatar}></button>
                 <div className="profile__info">
                     <div className="profile__name-section">
                         <h1 className="profile__name">{currentUser.name}</h1>
@@ -50,7 +22,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             <section className="cards">
                 {
                     cards.map((card) => {
-                        return <Card cardData={card} onCardClick={onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} key={card._id} />
+                        return <Card cardData={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} key={card._id} />
                     })
                 }
             </section>
