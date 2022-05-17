@@ -37,6 +37,8 @@ function App() {
     api.editProfile(name, about).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
+    }).catch((err) => {
+      console.log('Ошибка обновления данных пользователя', err)
     })
   }
 
@@ -44,6 +46,8 @@ function App() {
     api.updAvatar(avatar).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
+    }).catch((err) => {
+      console.log('Ошибка обновления аватара', err)
     })
   }
 
@@ -52,20 +56,25 @@ function App() {
 
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
       setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+    }).catch((err) => {
+      console.log('Ошибка удаления карточки', err)
     });
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then((data) => {
       setCards((cards) => cards.filter((c) => { return c._id !== card._id }))
-    }
-    );
+    }).catch((err) => {
+      console.log('Ошибка удаления карточки', err)
+    });
   }
 
   function handleNewCardSubmit({ name, link }) {
     api.addCard(name, link).then((res) => {
       setCards([res, ...cards])
       closeAllPopups();
+    }).catch((err) => {
+      console.log('Ошибка добавления новых карточек', err)
     })
   }
 
@@ -73,8 +82,7 @@ function App() {
     api.getProfile()
       .then(res => {
         setCurrentUser(res)
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.log('Ошибка загрузки данных профиля', err)
       })
 
@@ -85,8 +93,7 @@ function App() {
     api.getInitialCards()
       .then(res => {
         setCards(res)
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.log('Ошибка загрузки данных карточек', err)
       })
 
